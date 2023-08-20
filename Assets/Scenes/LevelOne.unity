@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db5dd55245c73b4fb0b0c05597e8b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 6862789331464649218}
   positionOffset: {x: 0, y: 1, z: -3}
   lookOffset: {x: 0, y: 1, z: -3}
   smoothing: 1
@@ -632,13 +632,18 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 0.01
+  m_Radius: 0.006
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.005, z: 0}
+--- !u!4 &6862789331464649218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471311871739039540, guid: 8d523776562f05941ac3c230b79ce5c9, type: 3}
+  m_PrefabInstance: {fileID: 3075294212816926006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6862789331464649219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,13 +670,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 0.01
+  m_Radius: 0.006
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.005, z: 0}
 --- !u!1001 &7708932105226713183
 PrefabInstance:
   m_ObjectHideFlags: 0

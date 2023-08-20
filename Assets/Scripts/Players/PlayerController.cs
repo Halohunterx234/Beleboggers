@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
         if (Player.P2 == player) print(movement);
         Vector3 displacement = transform.TransformDirection(movement.normalized) * moveSpeed;
         controller.Move((displacement + velocity) * Time.deltaTime);
-        anim.SetFloat("MoveX", movement.x);
-        anim.SetFloat("MoveY", movement.z);
+        //anim.SetFloat("MoveX", movement.x);
+        //anim.SetFloat("MoveY", movement.z);
 
         transform.Rotate(0, Input.GetAxis("Mouse X " + player.ToString()) * rotationSpeed * Time.deltaTime, 0);
     }
