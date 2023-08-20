@@ -22,6 +22,7 @@ public class CatAbility : Abilities
         if (!canBasic) return;
         canBasic = false;
         GameObject fish = Instantiate(fishGO, transform.position + transform.forward, transform.rotation);
+        fish.transform.Rotate(0, 90, 90);
         fish.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed;
     }
 

@@ -1139,7 +1139,7 @@ MonoBehaviour:
   SkillCooldown: 5
   canSkill: 0
   fishGO: {fileID: 2703343296017664495, guid: 91249b359a13c864a9ee2a01b30f6d82, type: 3}
-  fishSpeed: 1.06
+  fishSpeed: 5.16
   fishDamage: 3
 --- !u!4 &6862789331464649218 stripped
 Transform:
