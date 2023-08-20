@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     public float moveSpeed = 5f, rotationSpeed = 180f;
     Vector3 velocity;
+    //Basic atk & skill
+    public Abilities ability;
 
     public enum Player { P1, P2 };
     public Player player;
@@ -30,12 +32,22 @@ public class PlayerController : MonoBehaviour
             0,
             Input.GetAxis("Vertical " + player.ToString()));
 
-        if (Player.P2 == player) print(movement);
+        //if (Player.P2 == player) print(movement);
         Vector3 displacement = transform.TransformDirection(movement.normalized) * moveSpeed;
         controller.Move((displacement + velocity) * Time.deltaTime);
         //anim.SetFloat("MoveX", movement.x);
         //anim.SetFloat("MoveY", movement.z);
 
+        if (Input.GetButtonDown("Fire1 " + player.ToString()))
+        {
+            //Activiate corresponding basic atk
+            ability.BasicAttack();
+        }
+        else if (Input.GetButtonDown("Fire2 " + player.ToString()))
+        {
+            //Activate skill
+            ability.Skill1();
+        }
         transform.Rotate(0, Input.GetAxis("Mouse X " + player.ToString()) * rotationSpeed * Time.deltaTime, 0);
     }
 }
