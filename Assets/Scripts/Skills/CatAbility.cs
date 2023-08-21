@@ -27,6 +27,10 @@ public class CatAbility : Abilities
         GameObject fish = Instantiate(fishGO, firepoint.position + firepoint.forward, firepoint.rotation);
         fish.transform.Rotate(0, 90, 90);
         fish.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed;
+
+        //update its projectiles data
+        Projectiles p = fish.GetComponent<Projectiles>();
+        p.damage = fishDamage; p.speed = fishSpeed;
     }
 
     //Skill -> Enhancing attack speed

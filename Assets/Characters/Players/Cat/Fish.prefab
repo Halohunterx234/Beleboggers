@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2703343296017664497}
   - component: {fileID: 2703343296017664494}
   - component: {fileID: 2703343296017664498}
+  - component: {fileID: 7195417411255180480}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5da008b88a1d01d43a77017feb878778, type: 2}
+  - {fileID: 2100000, guid: c286b124f0d0c344199006701765f3dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,3 +116,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7195417411255180480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703343296017664495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a35b4fcaaff98a49be9e227cec92bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  despawnTime: 5
+  speed: 0
+  damage: 0

@@ -824,6 +824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d0f18fd40d2494a8533818ba7b23de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 10
+  deathParticle: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 180
   ability: {fileID: 6862789331464649221}
@@ -844,7 +846,7 @@ MonoBehaviour:
   canBasic: 0
   SkillCooldown: 5
   canSkill: 0
-  firepoint: {fileID: 0}
+  firepoint: {fileID: 311601888}
   eggGO: {fileID: 2703343296017664495, guid: 53ef0164bdda0b14abfc5a82c5e3f032, type: 3}
   eggBigGO: {fileID: 8839813260681115256, guid: fbc02c2aea3dbaa45a00ba6bcf43441c, type: 3}
   eggSpeed: 3.8

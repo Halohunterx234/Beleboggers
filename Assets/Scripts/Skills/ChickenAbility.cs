@@ -32,6 +32,10 @@ public class ChickenAbility : Abilities
 
         //Eggs are slow, have gravity, so will propel it in a arc 
         egg.GetComponent<Rigidbody>().velocity = firepoint.forward * eggSpeed + Vector3.up * eggSpeed;
+
+        //update its projectiles data
+        Projectiles p = egg.GetComponent<Projectiles>();
+        p.damage = eggDamage; p.speed = eggSpeed;
     }
 
     //Skill -> Yoink a big aoe egg
@@ -46,6 +50,10 @@ public class ChickenAbility : Abilities
 
         //velocity, 
         bigegg.GetComponent<Rigidbody>().velocity = firepoint.forward * eggBigSpeed + Vector3.up * eggBigSpeed;
+
+        //update projectile's damage and speed
+        Projectiles p = bigegg.GetComponent<Projectiles>();
+        p.damage = eggBigDamage; p.speed = eggBigSpeed;
     }
 
 

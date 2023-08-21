@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : Entity
 {
     NavMeshAgent agent;
     Animator anim;

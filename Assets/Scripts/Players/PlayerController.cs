@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     CharacterController controller;
     Animator anim;

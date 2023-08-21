@@ -523,6 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d0f18fd40d2494a8533818ba7b23de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 10
+  deathParticle: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 180
   ability: {fileID: 6341256828625176248}

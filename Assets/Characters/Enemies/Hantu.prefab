@@ -644,6 +644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c1f65a1569b6a4d8f5921a17e4e8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 5
+  deathParticle: {fileID: 0}
   target: {fileID: 0}
   player:
     serializedVersion: 2
@@ -661,4 +663,4 @@ CapsuleCollider:
   m_Radius: 0.05
   m_Height: 0.2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.11, z: 0}
+  m_Center: {x: 0, y: 0.12, z: 0}
