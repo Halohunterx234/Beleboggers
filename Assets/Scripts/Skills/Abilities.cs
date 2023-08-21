@@ -21,8 +21,12 @@ public abstract class Abilities : MonoBehaviour
     [SerializeField]
     protected bool canSkill;
 
+    [Header("References")]
+    public Transform firepoint;
+
     protected void Start()
     {
+        //Set initial values
         basiccd = 0f;
         skillcd = 0f;
         canBasic = true;
@@ -32,6 +36,7 @@ public abstract class Abilities : MonoBehaviour
     //Update CD whenever start skill or attack
     protected void Update()
     {
+        //Basic atk cooldown update
         if (!canBasic)
         {
             if (basiccd >= BasicCooldown)
@@ -41,6 +46,7 @@ public abstract class Abilities : MonoBehaviour
             }
             else basiccd += Time.deltaTime;
         }
+        //Skill cooldown update
         if (!canSkill)
         {
             if (skillcd >= SkillCooldown)

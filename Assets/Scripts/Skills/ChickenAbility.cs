@@ -5,46 +5,48 @@ using UnityEngine;
 public class ChickenAbility : Abilities
 {
     [Header("Projectile")]
-    public GameObject eggGO;
+    public GameObject eggGO, eggBigGO;
     private float ogCD;
 
-    [Header("Stats"), Range(0f, 10f)]
-    public float eggSpeed;
-    public int eggDamage;
+    [Header("Stats"), Range(0f, 20f)]
+    public float eggSpeed, eggBigSpeed;
+    public int eggDamage, eggBigDamage;
 
     //Pivot
-    private Transform firepoint;
 
     private void Awake()
     {
-        ogCD = BasicCooldown;
-        firepoint = GetComponentsInChildren<Transform>()[10].gameObject.transform; 
+
     }
     //Shoot eggs
     public override void BasicAttack()
     {
         if (!canBasic) return;
+
+        //Reset cooldown and start update loop
         canBasic = false;
-        GameObject egg = Instantiate(eggGO, firepoint.position, transform.rotation);
+        
+        //Spawn egg projectile
+        GameObject egg = Instantiate(eggGO, firepoint.position + firepoint.forward, transform.rotation);
         egg.transform.Rotate(0, 90, 90);
-        egg.GetComponent<Rigidbody>().velocity = firepoint.forward * 2*eggSpeed + Vector3.up * 2*eggSpeed;
+
+        //Eggs are slow, have gravity, so will propel it in a arc 
+        egg.GetComponent<Rigidbody>().velocity = firepoint.forward * eggSpeed + Vector3.up * eggSpeed;
     }
 
-    //Skill -> Enhancing attack speed
+    //Skill -> Yoink a big aoe egg
     public override void Skill1()
     {
         if (!canSkill) return;
         canSkill = false;
-        //Lower cd -> higher firing rate
-        BasicCooldown *= 0.5f;
-        StartCoroutine(ResetCD());
+
+        //shoot big egg
+        GameObject bigegg = Instantiate(eggBigGO, firepoint.position + 2*firepoint.forward, transform.rotation);
+        bigegg.transform.Rotate(0, 90, 90);
+
+        //velocity, 
+        bigegg.GetComponent<Rigidbody>().velocity = firepoint.forward * eggBigSpeed + Vector3.up * eggBigSpeed;
     }
 
-    //Timer to reset the buffed cd to its original state
-    IEnumerator ResetCD()
-    {
-        yield return new WaitForSeconds(3);
-        //Reset cd
-        BasicCooldown = ogCD;
-    }
+
 }
