@@ -21,10 +21,9 @@ public class Entity : MonoBehaviour
     //method to check/update hp
     public void UpdateHealth(int dmgvalue)
     {
-        print(Mathf.Abs(dmgvalue));
         hp -= dmgvalue;
-        if (Mathf.Abs(dmgvalue) == -1) UpdateColor(Color.red); //dmg color
-        else if (Mathf.Abs(dmgvalue) == 1) UpdateColor(Color.green); //heal color
+        if (Mathf.Sign(dmgvalue) == 1) UpdateColor(Color.red); //dmg color
+        else if (Mathf.Sign(dmgvalue) == -1) UpdateColor(Color.green); //heal color
         if (hp <= 0)
         {
             DeathEvent();

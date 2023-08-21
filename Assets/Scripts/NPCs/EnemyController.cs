@@ -22,7 +22,6 @@ public class EnemyController : Entity
     void Update()
     {
         agent.SetDestination(target.position);
-        
         //anim.SetFloat("MoveY", agent.velocity.magnitude / agent.desiredVelocity.magnitude);
     }
 }
