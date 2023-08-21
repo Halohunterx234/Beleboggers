@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 1392572937941981915}
   - component: {fileID: 1392572937941981909}
   - component: {fileID: 1392572937941981908}
+  - component: {fileID: 919132149185110282}
   m_Layer: 0
   m_Name: Yeti
   m_TagString: Untagged
@@ -435,10 +436,25 @@ MonoBehaviour:
   - {fileID: 7811478451214424338}
   - {fileID: 6098858722071336542}
   - {fileID: 7852743978349357636}
+  - {fileID: 7852743978349357636}
   target: {fileID: 0}
   player:
     serializedVersion: 2
     m_Bits: 0
+--- !u!136 &919132149185110282
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392572937941981914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 0.2
+  m_Direction: 1
+  m_Center: {x: 0.025, y: 0.12, z: 0}
 --- !u!1 &1605601417061090008
 GameObject:
   m_ObjectHideFlags: 0

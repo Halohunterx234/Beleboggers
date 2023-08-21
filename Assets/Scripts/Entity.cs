@@ -38,14 +38,12 @@ public class Entity : MonoBehaviour
         foreach (SkinnedMeshRenderer skm in Meshes)
         {
             skm.material.color = color;
-            print(skm.material);
-            print(skm.material.color);
         }
     }
     //reset color after a while
     IEnumerator ResetColor()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(.5f);
         UpdateColor(Color.white);
     }
     //death event
