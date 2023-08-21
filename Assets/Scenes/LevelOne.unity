@@ -973,6 +973,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 543450652494984231}
+    - target: {fileID: 1392572937941981908, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
+      propertyPath: Meshes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392572937941981908, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
+      propertyPath: Meshes.Array.data[5]
+      value: 
+      objectReference: {fileID: 8316052217430970776}
     - target: {fileID: 1392572937941981914, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
       propertyPath: m_Name
       value: Yeti
@@ -1147,3 +1155,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d523776562f05941ac3c230b79ce5c9, type: 3}
+--- !u!137 &8316052217430970776 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7852743978349357636, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
+  m_PrefabInstance: {fileID: 2274881193890249692}
+  m_PrefabAsset: {fileID: 0}
