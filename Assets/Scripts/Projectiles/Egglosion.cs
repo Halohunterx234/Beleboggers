@@ -6,19 +6,22 @@ using UnityEngine.Rendering;
 public class Egglosion : Projectiles
 {
     [Range(0f, 50f)]
-    public float egglosionRadius;
+    public float egglosionRadius; //radius of the eggplosion
     
 
     protected override void Awake()
     {
+        //Despawn in time
         Destroy(this.gameObject, despawnTime);
     }
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        //If the egg hits any object b4 despawning
         StartCoroutine(Eggplode());
     }
 
+    //AOE damage to all enemies with eggplosion radius
     IEnumerator Eggplode(float t=0)
     {
         //Delay if needed
@@ -37,7 +40,7 @@ public class Egglosion : Projectiles
                 entity.UpdateHealth(damage);
             }
         }
-
+        //Destroy egg projectile gameobjects
         Destroy(this.gameObject);
     }
 }

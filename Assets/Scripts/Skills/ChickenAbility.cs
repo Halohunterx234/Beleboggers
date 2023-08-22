@@ -12,12 +12,7 @@ public class ChickenAbility : Abilities
     public float eggSpeed, eggBigSpeed;
     public int eggDamage, eggBigDamage;
 
-    //Pivot
-
-    private void Awake()
-    {
-
-    }
+    
     //Shoot eggs
     public override void BasicAttack()
     {

@@ -16,6 +16,7 @@ public class CatAbility : Abilities
     public Material normalFish, fastFish;
     private void Awake()
     {
+        //Set temp cooldown variable value
         ogCD = BasicCooldown;
         fishGO.GetComponent<MeshRenderer>().material = normalFish;
     }
@@ -24,6 +25,9 @@ public class CatAbility : Abilities
     {
         if (!canBasic) return;
         canBasic = false;
+
+        //spawn fish, rotate it
+        //and yoink it
         GameObject fish = Instantiate(fishGO, firepoint.position + firepoint.forward, firepoint.rotation);
         fish.transform.Rotate(0, 90, 90);
         fish.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed;
@@ -38,9 +42,12 @@ public class CatAbility : Abilities
     {
         if (!canSkill) return;
         canSkill = false;
+
         //Lower cd -> higher firing rate
         BasicCooldown *= 0.5f;
         StartCoroutine(ResetCD());
+
+        //change of material purely to differentiate in skill state and not
         fishGO.GetComponent<MeshRenderer>().material = fastFish;
     }
 

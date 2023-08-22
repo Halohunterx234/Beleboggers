@@ -21,9 +21,14 @@ public class Entity : MonoBehaviour
     //method to check/update hp
     public void UpdateHealth(int dmgvalue)
     {
+        //Subtract damage from health
+        //if damage is positive, color entity red
+        //else damage is negative (meaning healing), color entity green
         hp -= dmgvalue;
         if (Mathf.Sign(dmgvalue) == 1) UpdateColor(Color.red); //dmg color
         else if (Mathf.Sign(dmgvalue) == -1) UpdateColor(Color.green); //heal color
+
+        //if entity is to die
         if (hp <= 0)
         {
             DeathEvent();
