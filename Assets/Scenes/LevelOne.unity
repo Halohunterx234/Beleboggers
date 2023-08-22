@@ -1404,7 +1404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1736341177192071264, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 177.43718
+      value: 177.43716
       objectReference: {fileID: 0}
     - target: {fileID: 1736341177192071264, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1412,15 +1412,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1736341177192071264, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1736341177192071264, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1736341177192071264, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1736341177192071264, guid: 61322c17185a2e94b90f7377d2529818, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1522,6 +1522,7 @@ GameObject:
   - component: {fileID: 1717723942}
   - component: {fileID: 1717723941}
   - component: {fileID: 1717723940}
+  - component: {fileID: 1717723944}
   m_Layer: 0
   m_Name: FlagCaptureArea
   m_TagString: Untagged
@@ -1608,6 +1609,21 @@ Transform:
   m_Father: {fileID: 317902568}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1717723944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717723939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9773b7d96af33c440af9680169de6b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capturingAreaPeriod: 6
+  capturingFlagPeriod: 2
+  Entities: []
 --- !u!1 &1725434436
 GameObject:
   m_ObjectHideFlags: 0
