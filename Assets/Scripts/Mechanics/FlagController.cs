@@ -17,6 +17,7 @@ public class FlagController : MonoBehaviour
     [Header("Capturing Area")]
     //6 Second Period (Capturing Area)
     bool capturingArea;
+    [SerializeField]
     float capturingAreaCD;
     [Range(0f, 10f)]
     public float capturingAreaPeriod;
@@ -24,13 +25,16 @@ public class FlagController : MonoBehaviour
     [Header("Capturing Flag")]
     //2 Second Period (Capturing Flag..) 
     bool capturingFlag;
+    [SerializeField]
     float capturingFlagCD;
     [Range(0f, 10f)]
     public float capturingFlagPeriod;
 
     //Tracking of entities within flag area
     public List<GameObject> Entities;
+    [SerializeField]
     private int Friendly, Hostile;
+    [SerializeField]
     private bool friendlyTeamLast, hostileTeamLast;
 
     //Internal References
@@ -76,6 +80,7 @@ public class FlagController : MonoBehaviour
                 capturingFlagCD = 0;
                 sc.AddScore(Entities.Count, Entities[0].GetComponent<Entity>());
             }
+            else capturingFlagCD += Time.deltaTime;
         }
     }
 
@@ -128,7 +133,7 @@ public class FlagController : MonoBehaviour
         }
 
         //if friendly team took over hostile team
-        else if ((Friendly > 0 && Hostile == 0) && hostileTeamLast)
+        else if ((Friendly > 0 && Hostile == 0))
         {
             capturingFlag = false;
             capturingArea = true;
@@ -149,6 +154,14 @@ public class FlagController : MonoBehaviour
             }
         }
 
+        //if nobody is on it
+        else if (Hostile == 0 && Friendly == 0)
+        {
+            capturingFlag = false;
+            capturingArea = false;
+            capturingAreaCD = 0;
+            capturingFlagCD = 0;
+        }
     }
 
     //This checks every entity that entered the flag area for the first time
@@ -160,6 +173,9 @@ public class FlagController : MonoBehaviour
         {
             //check in case it is somehow already in the list
             if (Entities.Contains(other.gameObject)) return;
+
+            //add to entity list
+            Entities.Add(entity.gameObject);
 
             //Fid out whether its a friendly or enemy
             if (entity.GetType() == typeof(PlayerController))
@@ -181,18 +197,20 @@ public class FlagController : MonoBehaviour
     //
     private void OnTriggerStay(Collider other)
     {
-
+        print(other.gameObject);
     }
 
     //Make a check if there are any changes to the current team war
     private void OnTriggerExit(Collider other)
     {
+        print("exiting");
         //Check if it is a entity
         Entity entity = other.gameObject.GetComponent<Entity>();
+
         if (entity != null)
         {
-            //check in case it is somehow already in the list
-            if (Entities.Contains(other.gameObject)) return;
+            //remove
+            if (Entities.Contains(entity.gameObject)) Entities.Remove(entity.gameObject); 
 
             //Fid out whether its a friendly or enemy
             if (entity.GetType() == typeof(PlayerController))
