@@ -13,10 +13,10 @@ public class Entity : MonoBehaviour
 
     //references
     public List<SkinnedMeshRenderer> Meshes; //throw into the inspector the parts w materials
-
+    FlagController fc;
     private void Awake()
     {
-
+        fc = FindObjectOfType<FlagController>();
     }
     //method to check/update hp
     public void UpdateHealth(int dmgvalue)
@@ -54,8 +54,11 @@ public class Entity : MonoBehaviour
     //death event
     public void DeathEvent()
     {
-      //death animations
-      Destroy(this.gameObject);
+        //death animations
+
+        //remove the gameobject if its in the flag area (will auto check in the function)
+        fc.UpdateEntity(this.gameObject, "Remove");
+        Destroy(this.gameObject);
     }
 
 }

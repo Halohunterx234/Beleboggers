@@ -85,8 +85,11 @@ public class FlagController : MonoBehaviour
     }
 
     //method to check the current team composition on the flag area
-    private void CheckArea()
+    public void CheckArea()
     {
+        //failsafe
+        if (Hostile < 0) Hostile = 0;
+        if (Friendly < 0) Friendly = 0;
         //Check for the below situations
 
         //0. if the flag has no prior entities on it, and a new team gets on it
@@ -113,14 +116,17 @@ public class FlagController : MonoBehaviour
         //if hostile team wins
         else if ((Hostile > 0 && Friendly == 0))
         {
-            capturingFlag = false;
-            capturingArea = true;
 
             //if the hostile team was capturing prior
             if (hostileTeamLast && !friendlyTeamLast)
             {
                 //no need to reset cd
                 //it should be frozen and will continue
+                //but since we reset both booleans to false
+                //need to check which capture bool to true
+                if (capturingAreaCD > 0) capturingArea = true;
+                else if (capturingFlagCD > 0) capturingFlag = true;
+                return;
             }
             //if the friendly team was capturing prior
             else if (friendlyTeamLast && !hostileTeamLast)
@@ -129,21 +135,31 @@ public class FlagController : MonoBehaviour
                 hostileTeamLast = true;
                 //Reset cd
                 capturingAreaCD = 0;
+                capturingFlagCD = 0;
             }
+            //else if no teams previously
+            else
+            {
+                hostileTeamLast = true;
+                friendlyTeamLast = false;
+            }
+            //Reset flag capturing cause a previous team was capturing 
+            capturingFlag = false;
+            capturingArea = true;
         }
 
         //if friendly team took over hostile team
         else if ((Friendly > 0 && Hostile == 0))
         {
-            capturingFlag = false;
-            capturingArea = true;
 
             //if the friendly team was capturing prior
-            if (!hostileTeamLast && friendlyTeamLast)
+            if (!hostileTeamLast && friendlyTeamLast && capturingFlag)
             {
                 //no need to reset cd
                 //it should be frozen and will continue
+                return;
             }
+
             //if the hostile team was capturing prior
             else if (!friendlyTeamLast && hostileTeamLast)
             {
@@ -151,7 +167,17 @@ public class FlagController : MonoBehaviour
                 hostileTeamLast = false;
                 //Reset cd
                 capturingAreaCD = 0;
+                capturingFlagCD = 0;
             }
+            //else if no teams previously
+            else
+            {
+                hostileTeamLast = false;
+                friendlyTeamLast = true;
+            }
+            //Reset flag capturing cause a previous team was capturing 
+            capturingFlag = false;
+            capturingArea = true;
         }
 
         //if nobody is on it
@@ -167,65 +193,79 @@ public class FlagController : MonoBehaviour
     //This checks every entity that entered the flag area for the first time
     private void OnTriggerEnter(Collider other)
     {
+        UpdateEntity(other.gameObject, "Add");
+    }
+
+    //
+    private void OnTriggerStay(Collider other)
+    {
+
+    }
+
+    //Make a check if there are any changes to the current team war
+    private void OnTriggerExit(Collider other)
+    {
+        UpdateEntity(other.gameObject, "Remove");
+    }
+
+    //Method to either add or remove a entity from the current entities list
+    //and update the Friendly/Hostile count accordingly
+    //afterwards checkarea() to update the rest
+
+    public void UpdateEntity(GameObject EntityGO, string type)
+    {
         //Check if it is a entity
-        Entity entity = other.gameObject.GetComponent<Entity>();
+        Entity entity = EntityGO.GetComponent<Entity>();
+
         if (entity != null)
         {
-            //check in case it is somehow already in the list
-            if (Entities.Contains(other.gameObject)) return;
-
-            //add to entity list
-            Entities.Add(entity.gameObject);
-
-            //Fid out whether its a friendly or enemy
-            if (entity.GetType() == typeof(PlayerController))
+            if (type == "Add")
             {
-                //its a player
-                Friendly++;
+                //check in case it is somehow already in the list
+                if (Entities.Contains(EntityGO)) return;
+
+                //add to entity list
+                Entities.Add(entity.gameObject);
+
+                //Fid out whether its a friendly or enemy
+                if (entity.GetType() == typeof(PlayerController))
+                {
+                    //its a player
+                    Friendly++;
+                }
+                else if (entity.GetType() == typeof(EnemyController))
+                {
+                    //its a enemy
+                    Hostile++;
+                }
             }
-            else if (entity.GetType() == typeof(EnemyController))
+            else if (type == "Remove")
             {
-                //its a enemy
-                Hostile++;
+                //remove
+                if (Entities.Contains(entity.gameObject)) Entities.Remove(entity.gameObject);
+
+                //Fid out whether its a friendly or enemy
+                if (entity.GetType() == typeof(PlayerController))
+                {
+                    //its a player
+                    Friendly--;
+                }
+                else if (entity.GetType() == typeof(EnemyController))
+                {
+                    //its a enemy
+                    Hostile--;
+                }
             }
 
             //update fleet composition and check whether any changes should be made accordingly
             CheckArea();
         }
     }
-
-    //
-    private void OnTriggerStay(Collider other)
-    {
-        print(other.gameObject);
-    }
-
-    //Make a check if there are any changes to the current team war
-    private void OnTriggerExit(Collider other)
-    {
-        print("exiting");
-        //Check if it is a entity
-        Entity entity = other.gameObject.GetComponent<Entity>();
-
-        if (entity != null)
-        {
-            //remove
-            if (Entities.Contains(entity.gameObject)) Entities.Remove(entity.gameObject); 
-
-            //Fid out whether its a friendly or enemy
-            if (entity.GetType() == typeof(PlayerController))
-            {
-                //its a player
-                Friendly--;
-            }
-            else if (entity.GetType() == typeof(EnemyController))
-            {
-                //its a enemy
-                Hostile--;
-            }
-
-            //check area
-            CheckArea();
-        }
-    }
 }
+
+
+
+//bug 
+//two enemies are capturing the flag
+//one enemy dies
+//capturing stops
