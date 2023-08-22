@@ -15,6 +15,7 @@ public class EnemyController : Entity
     public LayerMask friendlies, obstacles;
 
     [Header("Field of Vision")]
+    public Transform visionPoint;
     public float fovRadius, fovAngle;
     public List<GameObject> targets;
 
@@ -34,18 +35,18 @@ public class EnemyController : Entity
         //anim.SetFloat("MoveY", agent.velocity.magnitude / agent.desiredVelocity.magnitude);
 
         //Field of vision
-        Collider[] colliders = Physics.OverlapSphere(transform.position, fovRadius, friendlies);
+        Collider[] colliders = Physics.OverlapSphere(visionPoint.position, fovRadius, friendlies);
 
         //Go through all friendlies in the fov range
         foreach (Collider collider in colliders)
         {
-            Vector3 distanceToGameObject = collider.gameObject.transform.position - transform.position;
+            Vector3 distanceToGameObject = collider.gameObject.transform.position - visionPoint.position;
 
             //check if its within fov angle
-            if (Vector3.Angle(transform.forward, distanceToGameObject) <= fovAngle * 0.5f)
+            if (Vector3.Angle(visionPoint.forward, distanceToGameObject) <= fovAngle * 0.5f)
             {
                 //check if got vision and not being blocked by obstacles
-                bool canSee = Physics.Raycast(transform.position + 0.5f*Vector3.up, (collider.gameObject.transform.position - this.transform.position).normalized, Mathf.Infinity, ~obstacles);
+                bool canSee = Physics.Raycast(visionPoint.position, (collider.gameObject.transform.position - this.transform.position).normalized, Mathf.Infinity, ~obstacles);
                 if (canSee)
                 {
                     targets.Add(collider.gameObject);
@@ -59,7 +60,7 @@ public class EnemyController : Entity
 
         foreach (GameObject go in targets)
         {
-            float newdistance = Vector3.Distance(go.transform.position, this.transform.position);
+            float newdistance = Vector3.Distance(go.transform.position, visionPoint.transform.position);
             if (newdistance < distance)
             {
                 distance = newdistance;
