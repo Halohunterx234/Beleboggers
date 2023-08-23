@@ -116,5 +116,11 @@ public class PlayerController : Entity
         }
     }
 
-
+    public void Tp(Vector3 destination)
+    {
+        CharacterController cc = GetComponent<CharacterController>();
+        cc.enabled = false;
+        transform.position = destination;
+        cc.enabled = true;
+    }
 }

@@ -10,11 +10,8 @@ public class TeleporterController : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
-            GameObject player = other.gameObject;
-          
-            player.transform.position = new Vector3(destination.position.x
-                , destination.position.y,
-                 destination.position.z) + Vector3.forward;
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+            pc.Tp(destination.transform.position + 3*Vector3.forward);
         }
     }
 
