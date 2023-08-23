@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBarUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Image p1hp, p2hp;
+
+    public const float MAXHP=100;
+
+    public void UpdateHP(float value, PlayerController pc)
     {
-        
+        print(value / MAXHP);
+        if (pc.player == PlayerController.Player.P1) p1hp.fillAmount = value / MAXHP;
+        else if (pc.player == PlayerController.Player.P2) p2hp.fillAmount = value / MAXHP;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+

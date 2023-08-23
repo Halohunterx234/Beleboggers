@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class CatAbility : Abilities
 {
     [Header("Projectile")]
@@ -14,6 +14,10 @@ public class CatAbility : Abilities
 
     [Header("Materials")]
     public Material normalFish, fastFish;
+
+    [Header("UI")]
+    public Image BasicAttackImg, SkillImg;
+
     private void Awake()
     {
         //Set temp cooldown variable value
@@ -25,6 +29,7 @@ public class CatAbility : Abilities
     {
         if (!canBasic) return;
         canBasic = false;
+
 
         //spawn fish, rotate it
         //and yoink it
@@ -42,7 +47,7 @@ public class CatAbility : Abilities
     {
         if (!canSkill) return;
         canSkill = false;
-
+        
         //Lower cd -> higher firing rate
         BasicCooldown *= 0.5f;
         StartCoroutine(ResetCD());

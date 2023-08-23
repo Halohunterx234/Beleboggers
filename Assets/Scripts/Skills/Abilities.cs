@@ -17,12 +17,16 @@ public abstract class Abilities : MonoBehaviour
     [Header("Skill")]
     [Range(0f, 10f)]
     public float SkillCooldown;
+    [SerializeField]
     protected float skillcd;
     [SerializeField]
     protected bool canSkill;
 
     [Header("References")]
     public Transform firepoint;
+
+    //UI (for players)
+    protected CooldownBarUI cooldownbarUI;
 
     protected void Start()
     {
@@ -31,6 +35,7 @@ public abstract class Abilities : MonoBehaviour
         skillcd = 0f;
         canBasic = true;
         canSkill = true;
+        cooldownbarUI = FindObjectOfType<CooldownBarUI>();
     }
 
     //Update CD whenever start skill or attack
@@ -45,6 +50,12 @@ public abstract class Abilities : MonoBehaviour
                 canBasic = true;
             }
             else basiccd += Time.deltaTime;
+            cooldownbarUI.UpdateBasic(basiccd, BasicCooldown, "Basic", this.gameObject.GetComponent<PlayerController>().player);
+        }
+        else
+        {
+            //update ui
+            if (cooldownbarUI.CheckShade("Basic", this.gameObject.GetComponent<PlayerController>().player) == Color.grey)  cooldownbarUI.ResetShade("Basic", this.gameObject.GetComponent<PlayerController>().player);
         }
         //Skill cooldown update
         if (!canSkill)
@@ -54,7 +65,14 @@ public abstract class Abilities : MonoBehaviour
                 skillcd = 0;
                 canSkill = true;
             }
-            else skillcd += Time.deltaTime; 
+            else skillcd += Time.deltaTime;
+           cooldownbarUI.UpdateBasic(skillcd, SkillCooldown, "Skill", this.gameObject.GetComponent<PlayerController>().player);
+        }
+
+        else
+        {
+            //update ui
+            if (cooldownbarUI.CheckShade("Skill", this.gameObject.GetComponent<PlayerController>().player) == Color.grey) cooldownbarUI.ResetShade("Skill", this.gameObject.GetComponent<PlayerController>().player);
         }
     }
     //Basic Attack

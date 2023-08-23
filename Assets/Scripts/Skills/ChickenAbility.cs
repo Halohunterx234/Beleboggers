@@ -20,7 +20,7 @@ public class ChickenAbility : Abilities
 
         //Reset cooldown and start update loop
         canBasic = false;
-        
+
         //Spawn egg projectile
         GameObject egg = Instantiate(eggGO, firepoint.position + firepoint.forward, transform.rotation);
         egg.transform.Rotate(0, 90, 90);
@@ -38,6 +38,7 @@ public class ChickenAbility : Abilities
     {
         if (!canSkill) return;
         canSkill = false;
+
 
         //shoot big egg
         GameObject bigegg = Instantiate(eggBigGO, firepoint.position + 2*firepoint.forward, transform.rotation);

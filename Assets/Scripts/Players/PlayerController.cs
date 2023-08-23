@@ -10,8 +10,10 @@ public class PlayerController : Entity
     Animator anim;
     public float moveSpeed = 5f, rotationSpeed = 180f;
     Vector3 velocity;
+
     //Basic atk & skill
     public Abilities ability;
+
 
     public enum Player { P1, P2 };
     public Player player;
@@ -20,6 +22,8 @@ public class PlayerController : Entity
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        healthBarUI.UpdateHP(hp, this);
+
     }
 
     // Update is called once per frame

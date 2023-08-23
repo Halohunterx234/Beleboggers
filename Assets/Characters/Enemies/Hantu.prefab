@@ -265,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705977135784760666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1201, z: 0}
+  m_LocalPosition: {x: 0, y: 0.049, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -498,8 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c1f65a1569b6a4d8f5921a17e4e8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
-  flag: {fileID: 0}
+  hp: 50
+  flagORplayer: {fileID: 0}
   lockOnDistance: 1
   friendlies:
     serializedVersion: 2
@@ -511,12 +511,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   visionPoint: {fileID: 3122682122913479829}
-  fovRadius: 5
-  fovAngle: 180
+  fovRadius: 10
+  fovAngle: 135
   targets: []
   CurrentTarget: {fileID: 0}
   attackCoolDown: 1
-  attackDamage: 1
+  attackDamage: 10
   canAtk: 0
   aoeRadius: 0
   deathParticle: {fileID: 0}
@@ -533,7 +533,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6135909763976463682}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.06
+  m_Radius: 0.03
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

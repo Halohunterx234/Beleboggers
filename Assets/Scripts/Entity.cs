@@ -37,19 +37,21 @@ public class Entity : MonoBehaviour
     public bool canAtk;
     [Range(0f, 10f)]
     public float aoeRadius; //default is 0
+
     //events
     public GameObject deathParticle;
 
     //references
     public List<SkinnedMeshRenderer> Meshes; //throw into the inspector the parts w materials
+    protected HealthBarUI healthBarUI;
     FlagController fc;
     private void Awake()
     {
         fc = FindObjectOfType<FlagController>();
+        healthBarUI = FindObjectOfType<HealthBarUI>();
         agent = GetComponent<NavMeshAgent>();
         canAtk = false;
         atkCD = 0f;
-
     }
     //method to check/update hp
     public void UpdateHealth(int dmgvalue)
@@ -61,6 +63,12 @@ public class Entity : MonoBehaviour
         if (Mathf.Sign(dmgvalue) == 1) UpdateColor(Color.red); //dmg color
         else if (Mathf.Sign(dmgvalue) == -1) UpdateColor(Color.green); //heal color
 
+        //for players to update their health bar
+        PlayerController pc = this.gameObject.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            healthBarUI.UpdateHP(hp, pc);
+        }
         //if entity is to die
         if (hp <= 0)
         {
@@ -72,7 +80,6 @@ public class Entity : MonoBehaviour
     //update color
     void UpdateColor(Color color)
     {
-        print(color);
         foreach (SkinnedMeshRenderer skm in Meshes)
         {
             skm.material.color = color;
