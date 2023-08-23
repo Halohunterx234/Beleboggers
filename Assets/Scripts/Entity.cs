@@ -56,10 +56,12 @@ public class Entity : MonoBehaviour
     //events
     public GameObject deathParticle;
 
+
     //references
     public List<SkinnedMeshRenderer> Meshes; //throw into the inspector the parts w materials
     protected HealthBarUI healthBarUI;
     FlagController fc;
+    PlayerController player;
     private void Awake()
     {
         fc = FindObjectOfType<FlagController>();
@@ -117,6 +119,7 @@ public class Entity : MonoBehaviour
         fc.UpdateEntity(this.gameObject, "Remove");
         if (this.gameObject.GetComponent<PlayerController>())
         {
+            Instantiate(deathParticle, player.transform.position, player.transform.rotation);
             StartCoroutine(delay());
         }
         else Destroy(this.gameObject);
