@@ -16,7 +16,7 @@ public class ChickenAbility : Abilities
     //Shoot eggs
     public override void BasicAttack()
     {
-        if (!canBasic) return;
+        if (!canBasic || isLocked ) return;
 
         //Reset cooldown and start update loop
         canBasic = false;
@@ -36,7 +36,7 @@ public class ChickenAbility : Abilities
     //Skill -> Yoink a big aoe egg
     public override void Skill1()
     {
-        if (!canSkill) return;
+        if (!canSkill || isLocked) return;
         canSkill = false;
 
 
