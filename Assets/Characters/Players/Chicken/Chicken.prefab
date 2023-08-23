@@ -676,7 +676,7 @@ MonoBehaviour:
   attackDamage: 0
   canAtk: 0
   aoeRadius: 0
-  deathParticle: {fileID: 0}
+  deathParticle: {fileID: 8649128227618286004, guid: f6688a30965882f4eb4bfc444593fd54, type: 3}
   Meshes:
   - {fileID: 6020999733039558526}
   - {fileID: 954573010726097569}
