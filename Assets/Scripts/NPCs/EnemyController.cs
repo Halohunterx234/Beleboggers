@@ -9,74 +9,53 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : Entity
 {
-    NavMeshAgent agent;
-    Animator anim;
-    public Transform target;
-    public LayerMask friendlies, obstacles;
 
-    [Header("Field of Vision")]
-    public Transform visionPoint;
-    public float fovRadius, fovAngle;
-    public List<GameObject> targets;
+    Animator anim;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     {
-        //reset list of targets
-        targets.Clear();
 
         //animations
         //anim.SetFloat("MoveY", agent.velocity.magnitude / agent.desiredVelocity.magnitude);
 
-        //Field of vision
-        Collider[] colliders = Physics.OverlapSphere(visionPoint.position, fovRadius, friendlies);
+        //FOV
+        FieldOfVisionCheck(friendlies);
 
-        //Go through all friendlies in the fov range
-        foreach (Collider collider in colliders)
+        //Check Attack
+        UpdateAtkCD();
+    }
+
+    //colliders
+    private void OnTriggerEnter(Collider other)
+    {
+        if (CurrentTarget == null) return;
+        //Check if it is a entity, and it is the same target the enemy has been chasing
+        if (CurrentTarget.GetComponent<Entity>() != null && CurrentTarget.gameObject == other.gameObject)
         {
-            Vector3 distanceToGameObject = collider.gameObject.transform.position - visionPoint.position;
-
-            //check if its within fov angle
-            if (Vector3.Angle(visionPoint.forward, distanceToGameObject) <= fovAngle * 0.5f)
+            if (canAtk)
             {
-                //check if got vision and not being blocked by obstacles
-                bool canSee = Physics.Raycast(visionPoint.position, (collider.gameObject.transform.position - this.transform.position).normalized, Mathf.Infinity, ~obstacles);
-                if (canSee)
-                {
-                    targets.Add(collider.gameObject);
-                }
+                Attack(other, friendlies);
             }
         }
+    }
 
-        //Sort to find closest target
-        float distance = float.PositiveInfinity;
-        GameObject closestFriendly = null;
-
-        foreach (GameObject go in targets)
+    private void OnTriggerStay(Collider other)
+    {
+        if (CurrentTarget == null) return;
+        //Check if it is a entity, and it is the same target the enemy has been chasing
+        if (CurrentTarget.GetComponent<Entity>() != null && CurrentTarget.gameObject == other.gameObject)
         {
-            float newdistance = Vector3.Distance(go.transform.position, visionPoint.transform.position);
-            if (newdistance < distance)
+            if (canAtk)
             {
-                distance = newdistance;
-                closestFriendly = go;
+                Attack(other, friendlies);
             }
-        }
-
-        //Find the closest target
-        if (closestFriendly != null)
-        {
-            Transform friendlyTarget = closestFriendly.transform;
-            agent.SetDestination(friendlyTarget.position);
-        }
-        else
-        {
-            agent.SetDestination(target.position);
         }
     }
 }

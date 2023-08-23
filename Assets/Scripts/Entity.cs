@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 //base class for all entities that have hp
 public class Entity : MonoBehaviour
@@ -8,6 +10,33 @@ public class Entity : MonoBehaviour
     //essential stuff
     public int hp;
 
+
+    //~~AI~~
+    [Header("navMesh")]
+    public Transform flag;
+    NavMeshAgent agent;
+    [Range(0f, 10f)]
+    public float lockOnDistance = 1; //the distacne where entities will not change their current target to prevent mishaps
+
+    //fov stuff
+    public LayerMask friendlies, hostiles, obstacles;
+
+    [Header("Field of Vision")]
+    public Transform visionPoint;
+    public float fovRadius, fovAngle;
+    public List<GameObject> targets;
+
+    public GameObject CurrentTarget;
+
+    //~~Attack~~
+    [Range(0f, 10f)]
+    public float attackCoolDown;
+    private float atkCD;
+    [Range(0f, 10f)]
+    public int attackDamage;
+    public bool canAtk;
+    [Range(0f, 10f)]
+    public float aoeRadius; //default is 0
     //events
     public GameObject deathParticle;
 
@@ -17,6 +46,9 @@ public class Entity : MonoBehaviour
     private void Awake()
     {
         fc = FindObjectOfType<FlagController>();
+        agent = GetComponent<NavMeshAgent>();
+        canAtk = false;
+        atkCD = 0f;
     }
     //method to check/update hp
     public void UpdateHealth(int dmgvalue)
@@ -61,4 +93,126 @@ public class Entity : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    //Field of view function
+    public void FieldOfVisionCheck(LayerMask targetLayer)
+    {
+        //If target is very close to entity, then js focus on it and dont bother about anything else
+        //so this gives players chance to kill many enemies at the flag
+        //or to prevent enemies from being stuck from changing to and fro from flag to friendlies
+        if (CurrentTarget != null) {
+            if (Vector3.Distance(this.transform.position, CurrentTarget.transform.position) <= lockOnDistance) return;
+        }
+        //reset list of targets
+        targets.Clear();
+
+        //Field of vision
+        Collider[] colliders = Physics.OverlapSphere(visionPoint.position, fovRadius, targetLayer);
+
+        //Go through all friendlies in the fov range
+        foreach (Collider collider in colliders)
+        {
+            Vector3 distanceToGameObject = collider.gameObject.transform.position - visionPoint.position;
+
+            //check if its within fov angle
+            if (Vector3.Angle(visionPoint.forward, distanceToGameObject) <= fovAngle * 0.5f)
+            {
+                //check if got vision and not being blocked by obstacles
+                bool canSee = Physics.Raycast(visionPoint.position, (collider.gameObject.transform.position - this.transform.position).normalized, Mathf.Infinity, ~obstacles);
+                if (canSee)
+                {
+                    targets.Add(collider.gameObject);
+                }
+            }
+        }
+
+        //Sort to find closest target
+        float distance = float.PositiveInfinity;
+        GameObject closestFriendly = null;
+
+        foreach (GameObject go in targets)
+        {
+            float newdistance = Vector3.Distance(go.transform.position, visionPoint.transform.position);
+            if (newdistance < distance)
+            {
+                distance = newdistance;
+                closestFriendly = go;
+            }
+        }
+
+        //Find the closest target
+        if (closestFriendly != null)
+        {
+            Transform friendlyTarget = closestFriendly.transform;
+            agent.SetDestination(friendlyTarget.position);
+            CurrentTarget = closestFriendly;
+        }
+        else
+        {
+            agent.SetDestination(flag.position);
+            CurrentTarget = flag.gameObject;
+        }
+    }
+
+    //Attack
+
+    //update cooldown
+    public void UpdateAtkCD()
+    {
+        if (!canAtk && atkCD >= attackCoolDown)
+        {
+            canAtk = true;
+            atkCD = 0;
+        }
+        else if (!canAtk && atkCD < attackCoolDown)
+        {
+            atkCD += Time.deltaTime;
+        }
+    }
+
+    //attack move (both single-target and aoe)
+    public void Attack(Collider collider, LayerMask targetLayer)
+    {
+        
+        //if cooldown isnt up, return
+        if (!canAtk) return;
+
+        atkCD = 0;
+        canAtk = false;
+
+        //original target that is in collision
+        GameObject target = collider.gameObject;
+
+        //check if aoe or not
+        if (aoeRadius == 0)
+        {
+            //play attack animation
+            //
+
+            //deal dmg to the target
+            Entity entity = target.GetComponent<Entity>();
+            if (entity != null)
+            {
+                entity.UpdateHealth(attackDamage);
+            }
+        }
+        else
+        {
+            //Get a list of all colliders within a circle with the target as the center
+            Collider[] colliders;
+
+            colliders = Physics.OverlapSphere(target.gameObject.transform.position, aoeRadius, targetLayer);
+
+            foreach (Collider c in colliders)
+            {
+                Entity entity = c.gameObject.GetComponent<Entity>();
+
+                if (entity != null)
+                {
+                    entity.UpdateHealth(attackDamage);
+                }
+            }
+        }
+    }
 }
+
+

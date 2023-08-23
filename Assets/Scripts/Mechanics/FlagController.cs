@@ -216,7 +216,6 @@ public class FlagController : MonoBehaviour
     {
         //Check if it is a entity
         Entity entity = EntityGO.GetComponent<Entity>();
-
         if (entity != null)
         {
             if (type == "Add")

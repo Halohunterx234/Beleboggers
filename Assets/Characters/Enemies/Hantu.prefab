@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 6477945079257774097}
   - component: {fileID: 6477945079257774127}
   - component: {fileID: 6135909763976463683}
-  - component: {fileID: 1772588101}
+  - component: {fileID: 1480832690}
   m_Layer: 7
   m_Name: Hantu
   m_TagString: Untagged
@@ -499,22 +499,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
+  flag: {fileID: 0}
+  lockOnDistance: 1
+  friendlies:
+    serializedVersion: 2
+    m_Bits: 64
+  hostiles:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacles:
+    serializedVersion: 2
+    m_Bits: 256
+  visionPoint: {fileID: 3122682122913479829}
+  fovRadius: 5
+  fovAngle: 180
+  targets: []
+  CurrentTarget: {fileID: 0}
+  attackCoolDown: 1
+  attackDamage: 1
+  canAtk: 0
+  aoeRadius: 0
   deathParticle: {fileID: 0}
   Meshes:
   - {fileID: 3066605911346279900}
   - {fileID: 210315183887253801}
   - {fileID: 9070656186258126919}
-  target: {fileID: 0}
-  friendlies:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacles:
-    serializedVersion: 2
-    m_Bits: 256
-  visionPoint: {fileID: 3122682122913479829}
-  fovRadius: 10
-  fovAngle: 90
-  targets: []
 --- !u!195 &6477945079257774127
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -534,7 +543,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.2
-  m_BaseOffset: -0.03
+  m_BaseOffset: -0.037
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!136 &6135909763976463683
@@ -545,13 +554,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6135909763976463682}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.05
   m_Height: 0.2
   m_Direction: 1
   m_Center: {x: 0, y: 0.12, z: 0}
---- !u!143 &1772588101
+--- !u!143 &1480832690
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -563,7 +572,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0.2
-  m_Radius: 0.05
+  m_Radius: 0.06
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
