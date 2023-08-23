@@ -10,6 +10,8 @@ public class Entity : MonoBehaviour
     //essential stuff
     public int hp;
 
+    //Animator
+    Animator anim;
 
     //~~AI~~
     [Header("navMesh")]
@@ -51,6 +53,7 @@ public class Entity : MonoBehaviour
         healthBarUI = FindObjectOfType<HealthBarUI>();
         agent = GetComponent<NavMeshAgent>();
         canAtk = false;
+        anim = GetComponent<Animator>();
         atkCD = 0f;
     }
     //method to check/update hp

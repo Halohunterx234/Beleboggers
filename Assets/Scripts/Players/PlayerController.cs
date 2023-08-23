@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerController : Entity
 {
     CharacterController controller;
-    Animator anim;
+
     public float moveSpeed = 5f, rotationSpeed = 180f;
     Vector3 velocity;
 
@@ -29,7 +29,6 @@ public class PlayerController : Entity
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
         healthBarUI.UpdateHP(hp, this);
         doubleDmg = false;
         trans.a = 0;
