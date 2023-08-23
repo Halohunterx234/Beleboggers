@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
     public int hp;
 
     //Animator
-    Animator anim;
+    protected Animator anim;
 
     //~~AI~~
     [Header("navMesh")]
