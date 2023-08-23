@@ -13,6 +13,8 @@ public class Entity : MonoBehaviour
     //Animator
     protected Animator anim;
 
+    //lock
+    public bool isLocked = false;
 
     //audio 
     public AudioSource source;

@@ -30,7 +30,7 @@ public class PlayerController : Entity
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        healthBarUI.UpdateHP(hp, this);
+        if (!isLocked) healthBarUI.UpdateHP(hp, this);
         doubleDmg = false;
         trans.a = 0;
     }
@@ -38,6 +38,7 @@ public class PlayerController : Entity
     // Update is called once per frame
     void Update()
     {
+
         //Gravity
         //Movement vector
         if (controller.isGrounded) velocity = Vector3.zero;

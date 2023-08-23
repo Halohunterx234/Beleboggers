@@ -47,6 +47,7 @@ public abstract class Abilities : MonoBehaviour
     //Update CD whenever start skill or attack
     protected void Update()
     {
+        if (isLocked) return;
         //Basic atk cooldown update
         if (!canBasic)
         {
