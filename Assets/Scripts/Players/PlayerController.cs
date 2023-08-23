@@ -14,6 +14,8 @@ public class PlayerController : Entity
     //Basic atk & skill
     public Abilities ability;
 
+    //damage boost
+    public bool doubleDmg;
 
     public enum Player { P1, P2 };
     public Player player;
@@ -23,7 +25,7 @@ public class PlayerController : Entity
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         healthBarUI.UpdateHP(hp, this);
-
+        doubleDmg = false;
     }
 
     // Update is called once per frame
@@ -70,4 +72,14 @@ public class PlayerController : Entity
         //Rotate to input
         transform.Rotate(0, Input.GetAxis("Mouse X " + player.ToString()) * rotationSpeed * Time.deltaTime, 0);
     }
+
+    //damage boost
+    public IEnumerator dmgboost()
+    {
+        doubleDmg = true;
+        yield return new WaitForSeconds(30);
+        doubleDmg = false;
+    }
+
+
 }
