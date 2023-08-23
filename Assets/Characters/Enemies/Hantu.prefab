@@ -499,6 +499,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 50
+  source: {fileID: 0}
+  clip: {fileID: 0}
   flagORplayer: {fileID: 0}
   lockOnDistance: 1
   friendlies:
@@ -511,7 +513,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   visionPoint: {fileID: 3122682122913479829}
-  fovRadius: 10
+  fovRadius: 15
   fovAngle: 135
   targets: []
   CurrentTarget: {fileID: 0}
