@@ -35,7 +35,7 @@ public class EnemyController : Entity
     //colliders
     private void OnTriggerEnter(Collider other)
     {
-        if (CurrentTarget == null) return;
+        if (CurrentTarget == null || other.gameObject.GetComponent<EnemyController>()) return;
         //Check if it is a entity, and it is the same target the enemy has been chasing
         if (CurrentTarget.GetComponent<Entity>() != null && CurrentTarget.gameObject == other.gameObject)
         {
@@ -48,7 +48,7 @@ public class EnemyController : Entity
 
     private void OnTriggerStay(Collider other)
     {
-        if (CurrentTarget == null) return;
+        if (CurrentTarget == null || other.gameObject.GetComponent<EnemyController>()) return;
         //Check if it is a entity, and it is the same target the enemy has been chasing
         if (CurrentTarget.GetComponent<Entity>() != null && CurrentTarget.gameObject == other.gameObject)
         {
