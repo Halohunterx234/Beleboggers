@@ -164,7 +164,7 @@ public class Entity : MonoBehaviour
             }
             agent.SetDestination(flagORplayer.position);
             CurrentTarget = flagORplayer.gameObject;
-            
+             
 
         }
     }
