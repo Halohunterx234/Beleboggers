@@ -30,6 +30,9 @@ public class Entity : MonoBehaviour
 
     public GameObject CurrentTarget;
 
+    //Respawn
+    FriendlySpawner fs;
+
     //~~Attack~~
     [Range(0f, 10f)]
     public float attackCoolDown;
@@ -55,6 +58,7 @@ public class Entity : MonoBehaviour
         canAtk = false;
         anim = GetComponent<Animator>();
         atkCD = 0f;
+        fs = FindObjectOfType<FriendlySpawner>();
     }
     //method to check/update hp
     public void UpdateHealth(int dmgvalue)
@@ -101,7 +105,11 @@ public class Entity : MonoBehaviour
         anim.SetBool("IsDying", true);
         //remove the gameobject if its in the flagORplayer area (will auto check in the function)
         fc.UpdateEntity(this.gameObject, "Remove");
-        Destroy(this.gameObject);
+        if (this.gameObject.GetComponent<PlayerController>())
+        {
+            StartCoroutine(delay());
+        }
+        else Destroy(this.gameObject);
     }
 
     //Field of view function
@@ -238,6 +246,13 @@ public class Entity : MonoBehaviour
                 }
             }
         }
+    }
+
+    //respawn delay
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(fs.IERespawn(this.gameObject));
     }
 }
 
