@@ -13,6 +13,16 @@ public class Entity : MonoBehaviour
     //Animator
     protected Animator anim;
 
+
+    //audio 
+    public AudioSource source;
+    public AudioClip clip;
+    AudioSource aud;
+    private void Start()
+    {
+        aud = GetComponent<AudioSource>();
+    }
+
     //~~AI~~
     [Header("navMesh")]
     public Transform flagORplayer;
