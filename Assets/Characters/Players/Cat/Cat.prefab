@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 732640650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7172860327511735100}
   - component: {fileID: 4708557280046893478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7362206639193987545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5214628097585485810}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3269152153381550440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8281283904123281022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8899139542260884000}
   - component: {fileID: 6872730494114965578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1121381690052191084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7396126570374713069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1825848561256967801}
   - component: {fileID: 365301279933903884}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,9 @@ GameObject:
   - component: {fileID: 5119598065713620358}
   - component: {fileID: 5119598065713620408}
   - component: {fileID: 5119598065713620359}
-  m_Layer: 0
+  - component: {fileID: 543450652494984236}
+  - component: {fileID: 543450652494984235}
+  m_Layer: 6
   m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,6 +561,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
+  flagORplayer: {fileID: 0}
+  lockOnDistance: 1
+  friendlies:
+    serializedVersion: 2
+    m_Bits: 0
+  hostiles:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacles:
+    serializedVersion: 2
+    m_Bits: 0
+  visionPoint: {fileID: 0}
+  fovRadius: 0
+  fovAngle: 0
+  targets: []
+  CurrentTarget: {fileID: 0}
+  attackCoolDown: 0
+  attackDamage: 0
+  canAtk: 0
+  aoeRadius: 0
   deathParticle: {fileID: 0}
   Meshes:
   - {fileID: 6829268190114950751}
@@ -594,6 +616,36 @@ MonoBehaviour:
   fishDamage: 3
   normalFish: {fileID: 2100000, guid: 5da008b88a1d01d43a77017feb878778, type: 2}
   fastFish: {fileID: 2100000, guid: c286b124f0d0c344199006701765f3dc, type: 2}
+--- !u!136 &543450652494984236
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119598065713620357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.05
+  m_Height: 0.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.11, z: 0}
+--- !u!208 &543450652494984235
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119598065713620357}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.04, y: 0.05, z: 0.04}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.11, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6095623795553873914
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3035789521187718756}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8291958985607029418}
   - component: {fileID: 1245508064902023624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,7 +778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1878542605783618334}
   - component: {fileID: 3504060200660223981}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 55969500724530026}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4498900941753688408}
   - component: {fileID: 6829268190114950751}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +987,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8465565393680495178}
   - component: {fileID: 7953943239074022666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2311635287215050165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

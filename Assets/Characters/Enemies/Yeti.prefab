@@ -1047,7 +1047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 20
-  flag: {fileID: 0}
+  flagORplayer: {fileID: 0}
+  lockOnDistance: 1
   friendlies:
     serializedVersion: 2
     m_Bits: 64
@@ -1061,6 +1062,11 @@ MonoBehaviour:
   fovRadius: 15
   fovAngle: 180
   targets: []
+  CurrentTarget: {fileID: 0}
+  attackCoolDown: 5
+  attackDamage: 3
+  canAtk: 0
+  aoeRadius: 3
   deathParticle: {fileID: 0}
   Meshes:
   - {fileID: 3636467017945978233}
@@ -1077,7 +1083,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8100546058168272112}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.1
   m_Height: 0.2
