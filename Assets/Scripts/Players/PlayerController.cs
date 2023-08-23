@@ -14,6 +14,7 @@ public class PlayerController : Entity
     //Basic atk & skill
     public Abilities ability;
 
+
     //damage boost
     public bool doubleDmg;
 
@@ -43,6 +44,7 @@ public class PlayerController : Entity
         //Movement Input
         Vector3 displacement = transform.TransformDirection(movement.normalized) * moveSpeed;
         controller.Move((displacement + velocity) * Time.deltaTime);
+        
         //anim.SetFloat("MoveX", movement.x);
         //anim.SetFloat("MoveY", movement.z);
 
