@@ -52,6 +52,11 @@ public class FriendlyController : Entity
             if (canAtk)
             {
                 Attack(other, hostiles);
+                anim.SetBool("IsAttacking", true); 
+            }
+            else
+            {
+                anim.SetBool("IsAttacking", false);
             }
         }
     }
