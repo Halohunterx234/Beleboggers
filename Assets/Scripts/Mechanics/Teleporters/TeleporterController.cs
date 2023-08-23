@@ -8,11 +8,14 @@ public class TeleporterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other);
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
-            print("teleporting");
-            other.gameObject.transform.position = destination.transform.position + Vector3.forward;
+            GameObject player = other.gameObject;
+          
+            player.transform.position = new Vector3(destination.position.x
+                , destination.position.y,
+                 destination.position.z) + Vector3.forward;
         }
     }
+
 }
