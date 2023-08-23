@@ -704,7 +704,7 @@ MonoBehaviour:
   skillcd: 0
   canSkill: 0
   firepoint: {fileID: 732640650}
-  fishGO: {fileID: 2703343296017664495, guid: 91249b359a13c864a9ee2a01b30f6d82, type: 3}
+  fishGO: {fileID: 370789890945800801, guid: 0fae7f7321f76e8408aaa110aba0577d, type: 3}
   fishSpeed: 5.17
   fishDamage: 10
   normalFish: {fileID: 2100000, guid: 5da008b88a1d01d43a77017feb878778, type: 2}

@@ -711,8 +711,8 @@ MonoBehaviour:
   skillcd: 0
   canSkill: 0
   firepoint: {fileID: 1175413216}
-  eggGO: {fileID: 2703343296017664495, guid: 53ef0164bdda0b14abfc5a82c5e3f032, type: 3}
-  eggBigGO: {fileID: 8839813260681115256, guid: fbc02c2aea3dbaa45a00ba6bcf43441c, type: 3}
+  eggGO: {fileID: 7378738150708379664, guid: 56b9650b04852ec4bba1cc7a6b5e83ff, type: 3}
+  eggBigGO: {fileID: 4846628427897700184, guid: ec7012e877001f949920c3fc920b7645, type: 3}
   eggSpeed: 3.8
   eggBigSpeed: 4.9
   eggDamage: 15

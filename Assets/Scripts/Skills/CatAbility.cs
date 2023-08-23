@@ -36,17 +36,17 @@ public class CatAbility : Abilities
         //spawn fish, rotate it
         //and yoink it
         GameObject fish = Instantiate(fishGO, firepoint.position + firepoint.forward, firepoint.rotation);
-        fish.transform.Rotate(0, 90, 90);
+        fish.transform.Rotate(-80, 144, 130);
         fish.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed;
 
         //if in skill state, shoot two mroe fishes in two directions
         if (isBuffed )
         {
             GameObject fish1 = Instantiate(fishGO, firepoint.position + firepoint.forward + 0.5f * Vector3.left, firepoint.rotation);
-            fish1.transform.Rotate(0, 80, 90);
+            fish1.transform.Rotate(-80, 44, 220);
             fish1.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed + Vector3.left * 0.5f;
             GameObject fish2 = Instantiate(fishGO, firepoint.position + firepoint.forward + 0.5f*Vector3.right, firepoint.rotation);
-            fish2.transform.Rotate(0, -90, 90);
+            fish2.transform.Rotate(-80, 54, 220);
             fish2.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed + Vector3.right * 0.5f;
         }
         //update its projectiles data
