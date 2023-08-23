@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour
 
     //~~AI~~
     [Header("navMesh")]
-    public Transform flag;
+    public Transform flagORplayer;
     NavMeshAgent agent;
     [Range(0f, 10f)]
     public float lockOnDistance = 1; //the distacne where entities will not change their current target to prevent mishaps
@@ -49,6 +49,7 @@ public class Entity : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         canAtk = false;
         atkCD = 0f;
+
     }
     //method to check/update hp
     public void UpdateHealth(int dmgvalue)
@@ -88,7 +89,7 @@ public class Entity : MonoBehaviour
     {
         //death animations
 
-        //remove the gameobject if its in the flag area (will auto check in the function)
+        //remove the gameobject if its in the flagORplayer area (will auto check in the function)
         fc.UpdateEntity(this.gameObject, "Remove");
         Destroy(this.gameObject);
     }
@@ -97,8 +98,8 @@ public class Entity : MonoBehaviour
     public void FieldOfVisionCheck(LayerMask targetLayer)
     {
         //If target is very close to entity, then js focus on it and dont bother about anything else
-        //so this gives players chance to kill many enemies at the flag
-        //or to prevent enemies from being stuck from changing to and fro from flag to friendlies
+        //so this gives players chance to kill many enemies at the flagORplayer
+        //or to prevent enemies from being stuck from changing to and fro from flagORplayer to friendlies
         if (CurrentTarget != null) {
             if (Vector3.Distance(this.transform.position, CurrentTarget.transform.position) <= lockOnDistance) return;
         }
@@ -148,8 +149,23 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            agent.SetDestination(flag.position);
-            CurrentTarget = flag.gameObject;
+            //if friendly chase the closest player
+            if (this.gameObject.GetComponent<FriendlyController>() != null)
+            {
+                //Find closest player
+                PlayerController[] pcS = FindObjectsOfType<PlayerController>();
+                
+                //Check distance
+                if ((Vector3.Distance(pcS[0].gameObject.transform.position, this.transform.position) < (Vector3.Distance(pcS[1].gameObject.transform.position, this.transform.position))))
+                {
+                    flagORplayer = pcS[0].gameObject.transform;
+                }
+                else flagORplayer = pcS[1].gameObject.transform;
+            }
+            agent.SetDestination(flagORplayer.position);
+            CurrentTarget = flagORplayer.gameObject;
+            
+
         }
     }
 

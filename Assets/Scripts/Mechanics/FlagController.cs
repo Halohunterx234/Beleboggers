@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class FlagController : MonoBehaviour
 {
-    //To be attached to the cylinder with a capsule trigger collider at the base of the flag
-    //this is the capturing area of the flag that entities need to stay within
+    //To be attached to the cylinder with a capsule trigger collider at the base of the flagORplayer
+    //this is the capturing area of the flagORplayer that entities need to stay within
 
     //In charge of the following:
-    //1. detecting when entities are at the flag
-    //2. starting a 6 second period when only entities of one team are touching thw flag
+    //1. detecting when entities are at the flagORplayer
+    //2. starting a 6 second period when only entities of one team are touching thw flagORplayer
     //3. resetting the period when another team joins, or the previous team left
     //4. every 2 seconds, send the number of entities to the scoremanager to 
     //calculate and update the current score
@@ -30,7 +30,7 @@ public class FlagController : MonoBehaviour
     [Range(0f, 10f)]
     public float capturingFlagPeriod;
 
-    //Tracking of entities within flag area
+    //Tracking of entities within flagORplayer area
     public List<GameObject> Entities;
     [SerializeField]
     private int Friendly, Hostile;
@@ -58,10 +58,10 @@ public class FlagController : MonoBehaviour
 
     private void Update()
     {
-        //if entities of only one team are in the flag capturing area
+        //if entities of only one team are in the flagORplayer capturing area
         if (capturingArea)
         {
-            //if six seconds are over, start capturing the flag
+            //if six seconds are over, start capturing the flagORplayer
             if (capturingAreaCD >= capturingAreaPeriod)
             {
                 //Reset cooldown and start the capturingflag loop
@@ -71,7 +71,7 @@ public class FlagController : MonoBehaviour
             }
             else capturingAreaCD += Time.deltaTime;
         }
-        //if entities of only one team are capturing the flag
+        //if entities of only one team are capturing the flagORplayer
         else if (capturingFlag)
         {
             if (capturingFlagCD >= capturingFlagPeriod)
@@ -84,7 +84,7 @@ public class FlagController : MonoBehaviour
         }
     }
 
-    //method to check the current team composition on the flag area
+    //method to check the current team composition on the flagORplayer area
     public void CheckArea()
     {
         //failsafe
@@ -92,14 +92,14 @@ public class FlagController : MonoBehaviour
         if (Friendly < 0) Friendly = 0;
         //Check for the below situations
 
-        //0. if the flag has no prior entities on it, and a new team gets on it
+        //0. if the flagORplayer has no prior entities on it, and a new team gets on it
         //1. if a team is already capturing, and another entity of the other team steps in
-        //this will reset the capturing flag and set it to false
+        //this will reset the capturing flagORplayer and set it to false
         //2. or Situation 1 happened, then that foreign entity has died. So the surviving team
         //does not need to wait 6 seconds again, and their capturingflag starts immediately
         //3. or situation 1 happened, but the other result happened. So the new team has to wait 
-        //a new 6 seconds to re capture the area before starting capturing flag
-        //4. no entities are on the flag, which resets all capturingflag and capturingareas
+        //a new 6 seconds to re capture the area before starting capturing flagORplayer
+        //4. no entities are on the flagORplayer, which resets all capturingflag and capturingareas
 
         //Disrupt any capturing
         if (Hostile > 0 && Friendly > 0)
@@ -143,7 +143,7 @@ public class FlagController : MonoBehaviour
                 hostileTeamLast = true;
                 friendlyTeamLast = false;
             }
-            //Reset flag capturing cause a previous team was capturing 
+            //Reset flagORplayer capturing cause a previous team was capturing 
             capturingFlag = false;
             capturingArea = true;
         }
@@ -175,7 +175,7 @@ public class FlagController : MonoBehaviour
                 hostileTeamLast = false;
                 friendlyTeamLast = true;
             }
-            //Reset flag capturing cause a previous team was capturing 
+            //Reset flagORplayer capturing cause a previous team was capturing 
             capturingFlag = false;
             capturingArea = true;
         }
@@ -190,7 +190,7 @@ public class FlagController : MonoBehaviour
         }
     }
 
-    //This checks every entity that entered the flag area for the first time
+    //This checks every entity that entered the flagORplayer area for the first time
     private void OnTriggerEnter(Collider other)
     {
         UpdateEntity(other.gameObject, "Add");
@@ -265,6 +265,6 @@ public class FlagController : MonoBehaviour
 
 
 //bug 
-//two enemies are capturing the flag
+//two enemies are capturing the flagORplayer
 //one enemy dies
 //capturing stops
