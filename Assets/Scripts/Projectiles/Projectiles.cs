@@ -8,7 +8,7 @@ public class Projectiles : MonoBehaviour
     [Header("Stats"), Range(0f, 10f)]
     public float despawnTime;
     public float speed; public int damage;
-    PlayerController pc;
+    protected PlayerController pc;
     protected virtual void Awake()
     {
         //Despawn in x number of seconds
