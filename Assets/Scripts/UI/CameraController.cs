@@ -37,6 +37,7 @@ using UnityEngine;
         // Update is called once per frame
         void Update()
         {
+            if (target == null) return; 
             if (overTheShoulder) lookAngle = target.rotation.eulerAngles.y;
 
             // Rotate the offset by lookAngle.

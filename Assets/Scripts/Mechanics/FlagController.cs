@@ -16,6 +16,7 @@ public class FlagController : MonoBehaviour
 
     [Header("Capturing Area")]
     //6 Second Period (Capturing Area)
+    [SerializeField]
     bool capturingArea;
     [SerializeField]
     float capturingAreaCD;
@@ -24,6 +25,7 @@ public class FlagController : MonoBehaviour
 
     [Header("Capturing Flag")]
     //2 Second Period (Capturing Flag..) 
+    [SerializeField]
     bool capturingFlag;
     [SerializeField]
     float capturingFlagCD;
@@ -116,7 +118,7 @@ public class FlagController : MonoBehaviour
         //if hostile team wins
         else if ((Hostile > 0 && Friendly == 0))
         {
-
+            print("hostiling");
             //if the hostile team was capturing prior
             if (hostileTeamLast && !friendlyTeamLast)
             {

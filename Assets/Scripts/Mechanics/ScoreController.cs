@@ -15,6 +15,13 @@ public class ScoreController : MonoBehaviour
     //Every 50 score reached by the players, will lead to a brief stage:
     //where capturing is not allowed by the players and a load of enemies will come
 
+    //score ui
+    ScoreUI scoreui;
+
+    private void Awake()
+    {
+        scoreui = FindObjectOfType<ScoreUI>();
+    }
     public int Score;
     public void AddScore(int entities, Entity entity)
     {
@@ -22,11 +29,15 @@ public class ScoreController : MonoBehaviour
         if (entity.GetType() == typeof(PlayerController))
         {
             Score += entities;
+            scoreui.UpdateScore(Score);
         }
         //else if the score is for enemies
         else if (entity.GetType() == typeof(EnemyController))
         {
+            //if score is 0 or lesser js revert to 0
             Score -= entities;
+            if (Score < 0) Score = 0;
+            else scoreui.UpdateScore(Score);
         }
     }
 }
