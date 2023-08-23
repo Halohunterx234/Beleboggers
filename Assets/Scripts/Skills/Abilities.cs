@@ -28,6 +28,10 @@ public abstract class Abilities : MonoBehaviour
     //UI (for players)
     protected CooldownBarUI cooldownbarUI;
 
+    //for skill
+    protected bool isBuffed;
+
+
     protected void Start()
     {
         //Set initial values
@@ -60,6 +64,7 @@ public abstract class Abilities : MonoBehaviour
         //Skill cooldown update
         if (!canSkill)
         {
+            if (isBuffed) return;
             if (skillcd >= SkillCooldown)
             {
                 skillcd = 0;

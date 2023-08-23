@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d0f18fd40d2494a8533818ba7b23de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 100
   flagORplayer: {fileID: 0}
   lockOnDistance: 1
   friendlies:
@@ -609,13 +609,16 @@ MonoBehaviour:
   BasicCooldown: 0.5
   canBasic: 0
   SkillCooldown: 5
+  skillcd: 0
   canSkill: 0
   firepoint: {fileID: 732640650}
   fishGO: {fileID: 2703343296017664495, guid: 91249b359a13c864a9ee2a01b30f6d82, type: 3}
-  fishSpeed: 5.16
-  fishDamage: 3
+  fishSpeed: 5.17
+  fishDamage: 10
   normalFish: {fileID: 2100000, guid: 5da008b88a1d01d43a77017feb878778, type: 2}
   fastFish: {fileID: 2100000, guid: c286b124f0d0c344199006701765f3dc, type: 2}
+  BasicAttackImg: {fileID: 0}
+  SkillImg: {fileID: 0}
 --- !u!136 &543450652494984236
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -640,7 +643,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.04, y: 0.05, z: 0.04}
+  m_Extents: {x: 0.01, y: 0.05, z: 0.01}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1

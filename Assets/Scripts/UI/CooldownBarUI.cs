@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class CooldownBarUI : MonoBehaviour
 {
+    //UI
     public Image catBasic, catSkill, chickenBasic, chickenSkill;
+
+    //buffed color
+    public Color buffedColor;
 
     //update the corresponding skills visuals when they are in cooldown
     public void UpdateBasic(float value, float maxcd, string type, PlayerController.Player player)
@@ -107,5 +111,11 @@ public class CooldownBarUI : MonoBehaviour
             }
         }
         return Color.black;
+    }
+
+    //Show its buffed
+    public void BuffShade()
+    {
+        catSkill.color = buffedColor;
     }
 }

@@ -18,11 +18,13 @@ public class CatAbility : Abilities
     [Header("UI")]
     public Image BasicAttackImg, SkillImg;
 
+
     private void Awake()
     {
         //Set temp cooldown variable value
         ogCD = BasicCooldown;
         fishGO.GetComponent<MeshRenderer>().material = normalFish;
+        isBuffed = false;
     }
     //Shoot fishes
     public override void BasicAttack()
@@ -37,6 +39,16 @@ public class CatAbility : Abilities
         fish.transform.Rotate(0, 90, 90);
         fish.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed;
 
+        //if in skill state, shoot two mroe fishes in two directions
+        if (isBuffed )
+        {
+            GameObject fish1 = Instantiate(fishGO, firepoint.position + firepoint.forward + 0.5f * Vector3.left, firepoint.rotation);
+            fish1.transform.Rotate(0, 80, 90);
+            fish1.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed + Vector3.left * 0.5f;
+            GameObject fish2 = Instantiate(fishGO, firepoint.position + firepoint.forward + 0.5f*Vector3.right, firepoint.rotation);
+            fish2.transform.Rotate(0, -90, 90);
+            fish2.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed + Vector3.right * 0.5f;
+        }
         //update its projectiles data
         Projectiles p = fish.GetComponent<Projectiles>();
         p.damage = fishDamage; p.speed = fishSpeed;
@@ -50,10 +62,15 @@ public class CatAbility : Abilities
         
         //Lower cd -> higher firing rate
         BasicCooldown *= 0.5f;
+        isBuffed = true;
+        cooldownbarUI.BuffShade();
+
         StartCoroutine(ResetCD());
 
         //change of material purely to differentiate in skill state and not
         fishGO.GetComponent<MeshRenderer>().material = fastFish;
+
+
     }
 
     //Timer to reset the buffed cd to its original state
@@ -62,6 +79,7 @@ public class CatAbility : Abilities
         yield return new WaitForSeconds(3);
         //Reset cd
         BasicCooldown = ogCD;
+        isBuffed = false;
         fishGO.GetComponent<MeshRenderer>().material = normalFish;
     }
 }
