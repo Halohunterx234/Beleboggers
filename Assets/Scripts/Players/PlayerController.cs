@@ -11,6 +11,8 @@ public class PlayerController : Entity
     public float moveSpeed = 5f, rotationSpeed = 180f;
     Vector3 velocity;
 
+    //Animation bools
+
     //Basic atk & skill
     public Abilities ability;
 
@@ -47,6 +49,12 @@ public class PlayerController : Entity
 
         //Movement Input
         Vector3 displacement = transform.TransformDirection(movement.normalized) * moveSpeed;
+
+        if (displacement != Vector3.zero)
+        {
+            anim.SetBool("IsMoving", true);
+        }
+        else anim.SetBool("IsMoving", false);
         controller.Move((displacement + velocity) * Time.deltaTime);
         
         //anim.SetFloat("MoveX", movement.x);
