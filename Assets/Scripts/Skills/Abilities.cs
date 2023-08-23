@@ -32,6 +32,8 @@ public abstract class Abilities : MonoBehaviour
     protected bool isBuffed;
 
 
+    //for looby
+    public bool isLocked = false;
     protected void Start()
     {
         //Set initial values

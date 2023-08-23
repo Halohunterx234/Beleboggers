@@ -18,7 +18,6 @@ public class CatAbility : Abilities
     [Header("UI")]
     public Image BasicAttackImg, SkillImg;
 
-
     private void Awake()
     {
         //Set temp cooldown variable value
@@ -29,7 +28,7 @@ public class CatAbility : Abilities
     //Shoot fishes
     public override void BasicAttack()
     {
-        if (!canBasic) return;
+        if (!canBasic || isLocked) return;
         canBasic = false;
 
 
@@ -57,7 +56,7 @@ public class CatAbility : Abilities
     //Skill -> Enhancing attack speed
     public override void Skill1()
     {
-        if (!canSkill) return;
+        if (!canSkill || isLocked) return;
         canSkill = false;
         
         //Lower cd -> higher firing rate
