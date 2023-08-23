@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : Entity
@@ -14,9 +14,12 @@ public class PlayerController : Entity
     //Basic atk & skill
     public Abilities ability;
 
-
     //damage boost
     public bool doubleDmg;
+
+    //UI icon
+    public Image dmgBoostp1, dmgBoostp2;
+    private Color trans = Color.white;
 
     public enum Player { P1, P2 };
     public Player player;
@@ -27,6 +30,7 @@ public class PlayerController : Entity
         anim = GetComponent<Animator>();
         healthBarUI.UpdateHP(hp, this);
         doubleDmg = false;
+        trans.a = 0;
     }
 
     // Update is called once per frame
@@ -78,9 +82,31 @@ public class PlayerController : Entity
     //damage boost
     public IEnumerator dmgboost()
     {
+        //activate the bool
         doubleDmg = true;
+
+        //update the icon to show its dealing dmg
+        if (player == Player.P2)
+        {
+            dmgBoostp2.color = Color.white;
+        }
+        else if (player == Player.P1)
+        {
+            dmgBoostp1.color = Color.white;
+        }
         yield return new WaitForSeconds(30);
         doubleDmg = false;
+
+
+        //update the icon to show its gone
+        if (player == Player.P2)
+        {
+            dmgBoostp2.color = trans;
+        }
+        else if (player == Player.P1)
+        {
+            dmgBoostp1.color = trans;
+        }
     }
 
 
