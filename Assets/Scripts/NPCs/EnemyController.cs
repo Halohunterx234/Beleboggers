@@ -55,6 +55,11 @@ public class EnemyController : Entity
             if (canAtk)
             {
                 Attack(other, friendlies);
+                anim.SetBool("IsAttacking", true); //trigger anim. for enemies 
+            }
+            else
+            {
+                anim.SetBool("IsAttacking", false); 
             }
         }
     }

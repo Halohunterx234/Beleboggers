@@ -98,7 +98,7 @@ public class Entity : MonoBehaviour
     public void DeathEvent()
     {
         //death animations
-
+        anim.SetBool("IsDying", true);
         //remove the gameobject if its in the flagORplayer area (will auto check in the function)
         fc.UpdateEntity(this.gameObject, "Remove");
         Destroy(this.gameObject);
