@@ -562,6 +562,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  source: {fileID: 0}
+  clip: {fileID: 8300000, guid: 3d505fb8ed808e5408b37abab24d0425, type: 3}
   flagORplayer: {fileID: 0}
   lockOnDistance: 1
   friendlies:
@@ -594,6 +596,9 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 180
   ability: {fileID: 5119598065713620359}
+  doubleDmg: 0
+  dmgBoostp1: {fileID: 0}
+  dmgBoostp2: {fileID: 0}
   player: 0
 --- !u!114 &5119598065713620359
 MonoBehaviour:

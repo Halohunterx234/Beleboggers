@@ -12,6 +12,7 @@ public class PlayerController : Entity
     Vector3 velocity;
 
     //Animation bools
+    
 
     //Basic atk & skill
     public Abilities ability;
@@ -52,6 +53,7 @@ public class PlayerController : Entity
         if (displacement != Vector3.zero)
         {
             anim.SetBool("IsMoving", true);
+            
         }
         else anim.SetBool("IsMoving", false);
         controller.Move((displacement + velocity) * Time.deltaTime);
