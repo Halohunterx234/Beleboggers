@@ -128,7 +128,6 @@ public class FlagController : MonoBehaviour
                 //need to check which capture bool to true
                 if (capturingAreaCD > 0) capturingArea = true;
                 else if (capturingFlagCD > 0) capturingFlag = true;
-                return;
             }
             //if the friendly team was capturing prior
             else if (friendlyTeamLast && !hostileTeamLast)
@@ -159,7 +158,8 @@ public class FlagController : MonoBehaviour
             {
                 //no need to reset cd
                 //it should be frozen and will continue
-                return;
+                if (capturingAreaCD > 0) capturingArea = true;
+                else if (capturingFlagCD > 0) capturingFlag = true;
             }
 
             //if the hostile team was capturing prior

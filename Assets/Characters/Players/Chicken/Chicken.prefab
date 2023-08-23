@@ -710,7 +710,7 @@ MonoBehaviour:
   eggSpeed: 3.8
   eggBigSpeed: 4.9
   eggDamage: 15
-  eggBigDamage: 20
+  eggBigDamage: 30
 --- !u!1 &7890308662032807086
 GameObject:
   m_ObjectHideFlags: 0
