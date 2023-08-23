@@ -23,6 +23,7 @@ public class Collectibles : MonoBehaviour
     //External references
     public GameObject bee, elephant;
     PlayerController[] playerController;
+    CollectiblesSpawner cs;
 
     //Skill Stats
     [Range(0f, 10f)]
@@ -38,36 +39,41 @@ public class Collectibles : MonoBehaviour
     //
     private void Awake()
     {
+        Spawn();
         isSpawned = true;
         playerController = FindObjectsOfType<PlayerController>();
+        cs = GetComponentInParent<CollectiblesSpawner>();
+
     }
 
     //Spawning
     void Spawn()
     {
+        mr = GetComponent<MeshRenderer>();
         //Set visuals
-        collectibleNum = Random.Range(0, materials.Length);
+        collectibleNum = 0;
         mr.material = materials[collectibleNum];
     }
 
     //Select
     void Ability()
     {
+
         if (collectibleNum == 0)
         {
-
+            Damage();
         }
         else if (collectibleNum == 1)
         {
-
+            Heal();
         }
         else if (collectibleNum == 2)
         {
-
+            SpawnBee();
         }
         else if (collectibleNum == 3)
         {
-
+            SpawnElephant();
         }
     }
 
@@ -82,17 +88,21 @@ public class Collectibles : MonoBehaviour
 
     void Heal()
     {
-
+        foreach (PlayerController pc in playerController)
+        {
+            Entity entity = pc.gameObject.GetComponent<Entity>();
+            entity.UpdateHealth(-50);
+        }
     }
 
     void SpawnBee()
     {
-
+        Instantiate(bee, this.transform.position, Quaternion.identity);
     }
 
     void SpawnElephant()
     {
-
+        Instantiate(elephant, this.transform.position, Quaternion.identity);
     }
     //Collision code
     private void OnTriggerEnter(Collider other)

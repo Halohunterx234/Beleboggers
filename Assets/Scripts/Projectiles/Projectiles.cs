@@ -8,11 +8,12 @@ public class Projectiles : MonoBehaviour
     [Header("Stats"), Range(0f, 10f)]
     public float despawnTime;
     public float speed; public int damage;
-
+    PlayerController pc;
     protected virtual void Awake()
     {
         //Despawn in x number of seconds
         Destroy(this.gameObject, despawnTime);
+        pc = FindObjectOfType<PlayerController>();
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -25,7 +26,11 @@ public class Projectiles : MonoBehaviour
             Entity e = collision.gameObject.GetComponent<Entity>();
 
             //update hp
-            e.UpdateHealth(damage);
+            if (pc.doubleDmg)
+            {
+                e.UpdateHealth(2*damage);
+            }
+            else e.UpdateHealth(damage);
             Destroy(this.gameObject);
         }
     }

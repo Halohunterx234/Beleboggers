@@ -7,12 +7,13 @@ public class Egglosion : Projectiles
 {
     [Range(0f, 50f)]
     public float egglosionRadius; //radius of the eggplosion
-    
+    PlayerController pc;
 
     protected override void Awake()
     {
         //Despawn in time
         Destroy(this.gameObject, despawnTime);
+        pc = FindObjectOfType<PlayerController>();
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -37,7 +38,12 @@ public class Egglosion : Projectiles
             {
                 //do damage
                 Entity entity = collider.gameObject.GetComponent<EnemyController>();
-                entity.UpdateHealth(damage);
+                //update hp
+                if (pc.doubleDmg)
+                {
+                    entity.UpdateHealth(2 * damage);
+                }
+                else entity.UpdateHealth(damage);
             }
         }
         //Destroy egg projectile gameobjects
