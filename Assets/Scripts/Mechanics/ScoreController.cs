@@ -44,7 +44,12 @@ public class ScoreController : MonoBehaviour
             if (Score < 0) Score = 0;
             else scoreui.UpdateScore(Score);
         }
-
+        //if the players reached the end and won
+        if (Score >= 300)
+        {
+            GameController gc = FindObjectOfType<GameController>();
+            gc.Win();
+        }
         //if the players reached the next milestone
         if (Score >= 80 && !stage1)
         {
