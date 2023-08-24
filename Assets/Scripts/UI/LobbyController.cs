@@ -13,9 +13,12 @@ public class LobbyController : MonoBehaviour
     public GameObject StartScreen, MainScreen, CreditScreen, InstructionScreen, CharacterScreen;
     private void OnTriggerEnter(Collider other)
     {
+        print(other.gameObject);
         if (other.gameObject.GetComponent<Entity>())
         {
-            if (Lobby.activeSelf == false) Lobby.SetActive(true);
+            print("yes");
+            Lobby.SetActive(true);
+            print(Lobby.activeSelf);
         }
     }
 
