@@ -80,7 +80,7 @@ public class FlagController : MonoBehaviour
             {
                 //Reset cooldown and update score using scoremanager
                 capturingFlagCD = 0;
-                sc.AddScore(Entities.Count, Entities[0].GetComponent<Entity>());
+                sc.AddScore(2*Entities.Count, Entities[0].GetComponent<Entity>());
             }
             else capturingFlagCD += Time.deltaTime;
         }

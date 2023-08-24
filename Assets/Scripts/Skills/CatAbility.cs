@@ -21,12 +21,16 @@ public class CatAbility : Abilities
     //audio
     public AudioSource atkSource;
 
+    //external
+    GameController gc;
+
     private void Awake()
     {
         //Set temp cooldown variable value
         ogCD = BasicCooldown;
         fishGO.GetComponent<MeshRenderer>().material = normalFish;
         isBuffed = false;
+        gc = FindObjectOfType<GameController>();
     }
     //Shoot fishes
     public override void BasicAttack()
@@ -55,7 +59,9 @@ public class CatAbility : Abilities
         
         //update its projectiles data
         Projectiles p = fish.GetComponent<Projectiles>();
-        p.damage = fishDamage; p.speed = fishSpeed;
+        if (gc.dealsdoubledmg) p.damage = 2 * fishDamage;
+        else p.damage = fishDamage;
+        p.speed = fishSpeed;
     }
 
     //Skill -> Enhancing attack speed

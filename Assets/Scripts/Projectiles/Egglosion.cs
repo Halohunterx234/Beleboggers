@@ -12,6 +12,7 @@ public class Egglosion : Projectiles
     {
         //Despawn in time
         Destroy(this.gameObject, despawnTime);
+        gc = FindObjectOfType<GameController>();
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -37,7 +38,7 @@ public class Egglosion : Projectiles
                 //do damage
                 Entity entity = collider.gameObject.GetComponent<EnemyController>();
                 //update hp
-                if (pc.doubleDmg)
+                if (gc.dealsdoubledmg)
                 {
                     entity.UpdateHealth(2 * damage);
                 }

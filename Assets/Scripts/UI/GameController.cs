@@ -10,6 +10,9 @@ public class GameController : MonoBehaviour
     //Overlay Screens
     public GameObject winScreen, loseScreen;
 
+    //double dmg
+    public bool dealsdoubledmg = false;
+
     //method to start lose
     public void Lose()
     {
@@ -29,5 +32,13 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("Lobby");
+    }
+
+    //corotuine to reset dmg buff
+    public IEnumerator DmgBuff()
+    {
+        dealsdoubledmg = true;
+        yield return new WaitForSeconds(30);
+        dealsdoubledmg = false;
     }
 }

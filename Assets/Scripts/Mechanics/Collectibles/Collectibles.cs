@@ -24,6 +24,7 @@ public class Collectibles : MonoBehaviour
     public GameObject bee, elephant;
     PlayerController[] playerController;
     CollectiblesSpawner cs;
+    GameController gc;
 
     //Skill Stats
     [Range(0f, 10f)]
@@ -43,7 +44,7 @@ public class Collectibles : MonoBehaviour
         isSpawned = true;
         playerController = FindObjectsOfType<PlayerController>();
         cs = GetComponentInParent<CollectiblesSpawner>();
-
+        gc = FindObjectOfType<GameController>();
     }
 
     //Spawning
@@ -51,7 +52,7 @@ public class Collectibles : MonoBehaviour
     {
         mr = GetComponent<MeshRenderer>();
         //Set visuals
-        collectibleNum = 0;
+        collectibleNum = Random.Range(0, 3);
         mr.material = materials[collectibleNum];
     }
 
@@ -80,12 +81,14 @@ public class Collectibles : MonoBehaviour
     //Abiltiies
     void Damage()
     {
+        StartCoroutine(gc.DmgBuff());
         foreach (PlayerController pc in playerController)
         {
             StartCoroutine(pc.dmgboost());
         }
     }
 
+   
     void Heal()
     {
         foreach (PlayerController pc in playerController)

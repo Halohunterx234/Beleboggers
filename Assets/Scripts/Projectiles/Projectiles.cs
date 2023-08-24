@@ -8,12 +8,13 @@ public class Projectiles : MonoBehaviour
     [Header("Stats"), Range(0f, 10f)]
     public float despawnTime;
     public float speed; public int damage;
-    protected PlayerController pc;
+    public GameObject chicken;
+    public GameController gc;
     protected virtual void Awake()
     {
         //Despawn in x number of seconds
         Destroy(this.gameObject, despawnTime);
-        pc = FindObjectOfType<PlayerController>();
+        gc = FindObjectOfType<GameController>();
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -25,10 +26,10 @@ public class Projectiles : MonoBehaviour
             //if the projectile hits a enemy
             Entity e = collision.gameObject.GetComponent<Entity>();
 
-            //update hp
-            if (pc.doubleDmg)
+            //double dmg
+            if (gc.dealsdoubledmg)
             {
-                e.UpdateHealth(2*damage);
+               e.UpdateHealth(2*damage);
             }
             else e.UpdateHealth(damage);
             Destroy(this.gameObject);

@@ -94,7 +94,6 @@ public class PlayerController : Entity
     public IEnumerator dmgboost()
     {
         //activate the bool
-        doubleDmg = true;
 
         //update the icon to show its dealing dmg
         if (player == Player.P2)
@@ -106,7 +105,6 @@ public class PlayerController : Entity
             dmgBoostp1.color = Color.white;
         }
         yield return new WaitForSeconds(30);
-        doubleDmg = false;
 
 
         //update the icon to show its gone
