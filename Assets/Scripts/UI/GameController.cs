@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     //retry
     public void BackToMenu()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("Lobby");
     }
 }

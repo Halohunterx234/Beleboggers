@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 20
   isLocked: 0
-  source: {fileID: 0}
+  source: {fileID: 8376458482837936194}
   clip: {fileID: 0}
   flagORplayer: {fileID: 0}
   lockOnDistance: 1

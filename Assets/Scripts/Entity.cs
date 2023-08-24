@@ -121,7 +121,7 @@ public class Entity : MonoBehaviour
         fc.UpdateEntity(this.gameObject, "Remove");
         if (this.gameObject.GetComponent<PlayerController>())
         {
-            Instantiate(deathParticle, player.transform.position, player.transform.rotation);
+            //Instantiate(deathParticle, player.transform.position, player.transform.rotation);
             StartCoroutine(delay());
         }
         else Destroy(this.gameObject);
@@ -224,7 +224,7 @@ public class Entity : MonoBehaviour
         
         //if cooldown isnt up, return
         if (!canAtk) return;
-
+        print(anim.GetBool("IsAttacking"));
         atkCD = 0;
         canAtk = false;
 
@@ -233,6 +233,10 @@ public class Entity : MonoBehaviour
 
         //original target that is in collision
         GameObject target = collider.gameObject;
+
+        //play animation
+        anim.SetBool("IsAttacking", true); //for animation to switch from walking to attacking 
+        print(anim.GetBool("IsAttacking"));
 
         //check if aoe or not
         if (aoeRadius == 0)
@@ -264,6 +268,8 @@ public class Entity : MonoBehaviour
                 }
             }
         }
+        StartCoroutine(resetAnim());
+        print(anim.GetBool("IsAttacking"));
     }
 
     //respawn delay
@@ -271,6 +277,13 @@ public class Entity : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         StartCoroutine(fs.IERespawn(this.gameObject));
+    }
+
+    //reset animation
+    IEnumerator resetAnim()
+    {
+        yield return new WaitForSeconds(2);
+        anim.SetBool("IsAttacking", false); //for animation to switch from walking to attacking 
     }
 }
 

@@ -230,10 +230,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capturingArea: 0
   capturingAreaCD: 0
-  capturingAreaPeriod: 0
+  capturingAreaPeriod: 6
   capturingFlag: 0
   capturingFlagCD: 0
-  capturingFlagPeriod: 0
+  capturingFlagPeriod: 2
   Entities: []
   Friendly: 0
   Hostile: 0
