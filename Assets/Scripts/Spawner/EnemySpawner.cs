@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
     //cooldown
     [SerializeField]
-    private float cd, cdmax, cdrangemin, cdrangemax;
+    public float cd, cdmax, cdrangemin, cdrangemax;
 
     //enemies
     public GameObject hantu, yeti;
@@ -25,8 +25,8 @@ public class EnemySpawner : MonoBehaviour
     {
         //start first set
         cd = 0;
-        cdrangemin = 7.5f;
-        cdrangemax = 10f;
+        cdrangemin = 10f;
+        cdrangemax = 12.5f;
         cdmax = Random.Range(cdrangemin, cdrangemax);
     }
     private void Update()
