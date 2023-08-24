@@ -11,7 +11,8 @@ public class PlayerController : Entity
     public float moveSpeed = 5f, rotationSpeed = 180f;
     Vector3 velocity;
 
-    //Animation bools
+    //Audio
+
     
 
     //Basic atk & skill
