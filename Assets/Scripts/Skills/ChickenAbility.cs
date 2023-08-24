@@ -12,7 +12,9 @@ public class ChickenAbility : Abilities
     public float eggSpeed, eggBigSpeed;
     public int eggDamage, eggBigDamage;
 
-    
+    //audio
+    public AudioSource attkSound;
+
     //Shoot eggs
     public override void BasicAttack()
     {
@@ -39,6 +41,7 @@ public class ChickenAbility : Abilities
         if (!canSkill || isLocked) return;
         canSkill = false;
 
+        attkSound.Play();
 
         //shoot big egg
         GameObject bigegg = Instantiate(eggBigGO, firepoint.position + 2*firepoint.forward, transform.rotation);

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 //base class for all entities that have hp
+[RequireComponent(typeof(AudioSource))]
 public class Entity : MonoBehaviour
 {
     //essential stuff
@@ -19,10 +20,9 @@ public class Entity : MonoBehaviour
     //audio 
     public AudioSource source;
     public AudioClip clip;
-    AudioSource aud;
     private void Start()
     {
-        aud = GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();
     }
 
     //~~AI~~
@@ -227,6 +227,9 @@ public class Entity : MonoBehaviour
 
         atkCD = 0;
         canAtk = false;
+
+        //play attack sound
+        source.Play();
 
         //original target that is in collision
         GameObject target = collider.gameObject;

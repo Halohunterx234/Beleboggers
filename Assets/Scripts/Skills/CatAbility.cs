@@ -18,6 +18,9 @@ public class CatAbility : Abilities
     [Header("UI")]
     public Image BasicAttackImg, SkillImg;
 
+    //audio
+    public AudioSource atkSource;
+
     private void Awake()
     {
         //Set temp cooldown variable value
@@ -41,6 +44,7 @@ public class CatAbility : Abilities
         //if in skill state, shoot two mroe fishes in two directions
         if (isBuffed )
         {
+            atkSource.Play();
             GameObject fish1 = Instantiate(fishGO, firepoint.position + firepoint.forward + 0.5f * Vector3.left, firepoint.rotation);
             fish1.transform.Rotate(-80, 44, 220);
             fish1.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed + Vector3.left * 0.5f;
@@ -48,6 +52,7 @@ public class CatAbility : Abilities
             fish2.transform.Rotate(-80, 54, 220);
             fish2.GetComponent<Rigidbody>().velocity = transform.forward * fishSpeed + Vector3.right * 0.5f;
         }
+        
         //update its projectiles data
         Projectiles p = fish.GetComponent<Projectiles>();
         p.damage = fishDamage; p.speed = fishSpeed;
